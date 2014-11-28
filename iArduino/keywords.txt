@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map for iArduino
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+iArduinoHandleProtocol	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+iArduinoSetup	KEYWORD2
+iArduinoLoop	KEYWORD2
+available	KEYWORD2
+begin		KEYWORD2
+check		KEYWORD2
+read		KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
