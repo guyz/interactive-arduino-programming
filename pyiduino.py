@@ -103,11 +103,6 @@ class Iduino(object):
     
     def tone(self, i, freq):
         self.__execFunc(self.tone, i, freq)
-    
-#     def print(self):
-#         pass
-        
-#     servo?.attach, servo?.write # TODO: define as an object
 
     # uploads and runs a program
     def upload(self, prog):
@@ -131,7 +126,19 @@ class Iduino(object):
 #             self._ser.write('autorun\r\n')
         self._ser.write('go\r\n')
         
-    
+    def changePort(self, hw, rxPin=8, txPin=9):
+        self.port(hw, rxPin, txPin)
+
+    def port(self, hw, rxPin=8, txPin=9):
+        smode = 0
+        if hw:
+            smode = 1
+
+        self.__execFunc(self.port, rxPin, txPin)
+
+        print "You may need to restart the device for the port change to take effect .."
+
+
     def __execFunc(self, func, *args):
         f = '\r\n' + func.__name__ + '(' 
         for v in args:
