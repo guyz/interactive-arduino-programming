@@ -133,7 +133,7 @@ class Iduino(object):
         
     
     def __execFunc(self, func, *args):
-        f = func.__name__ + '(' 
+        f = '\r\n' + func.__name__ + '(' 
         for v in args:
             f = f + str(v) + ','
         f = f[:-1] + ')\r\n'
@@ -143,4 +143,32 @@ class Iduino(object):
         self._ser.readline() # echo
         return self._ser.readline().strip( "\r\n" )
             
-    
+
+class Servo(object):
+    '''
+    Wrapper for an arduino Servo object
+    '''
+    pinToServoMap = {}
+    idCounter = 0
+    def __init__(self, iduino):
+        self._iduino = iduino
+        
+    def attach(self, i):
+        if not (i in Servo.pinToServoMap):
+            Servo.idCounter += 1
+            Servo.pinToServoMap[i] = Servo.idCounter
+        
+        self._id = Servo.pinToServoMap[i]
+        self.__execFunc(self.attach, i)
+
+    def write(self, v):
+        self.__execFunc(self.write, v)
+                
+    def __execFunc(self, func, v):
+        f = '\r\n' + 'servo' + str(self._id) + '.' + func.__name__ + '(' + str(v) + ')\r\n' 
+        
+        self._iduino._ser.flushInput()
+        self._iduino._ser.write(f)
+        self._iduino._ser.readline() # echo
+        return self._iduino._ser.readline().strip( "\r\n" )
+        

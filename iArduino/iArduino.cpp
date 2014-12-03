@@ -764,6 +764,7 @@ int stepRun()
     }
     runStep = 1;
   }
+  return STOPPED; // GUY - don't go into step mode
   for (;;) {
     putcS('>');
     getsS(buf, INPUT_LEN);
